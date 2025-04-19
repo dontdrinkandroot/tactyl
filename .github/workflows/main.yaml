@@ -49,7 +49,7 @@ jobs:
             -   name: Find
                 run: find
             -   name: Rsync to server
-                uses: burnett01/rsync-deployments@7.0.2
+                uses: burnett01/rsync-deployments@6.0.0
                 with:
                     switches: -avz --delete
                     path: dist/tactyl/browser/
