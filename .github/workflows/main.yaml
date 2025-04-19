@@ -23,8 +23,10 @@ jobs:
                     cache: 'pnpm'
             -   name: Install dependencies
                 run: pnpm install
-            -   name: Generate icons
-                run: pnpm icons
+            -   name: Generate icons maskable
+                run: pnpm icons-maskable
+            -   name: Generate icons any
+                run: pnpm icons-any
             -   name: Build Prod
                 run: pnpm ng build --configuration production
             -   name: Archive build
