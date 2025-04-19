@@ -10,8 +10,9 @@
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
-                    "style": "scss",
-                    "skipTests": true
+                    "style": "none",
+                    "skipTests": true,
+                    "changeDetection": "OnPush"
                 },
                 "@schematics/angular:class": {
                     "skipTests": true

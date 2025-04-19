@@ -1,0 +1,59 @@
+<h1>I/O</h1>
+
+<h2>Inputs</h2>
+
+<ul>
+    @for (input of inputs; track input.id) {
+        <li>
+            <dl>
+                <dt>ID</dt>
+                <dd>{{ input.id }}</dd>
+                <dt>Type</dt>
+                <dd>{{ input.type }}</dd>
+                <dt>Manufacturer</dt>
+                <dd>{{ input.manufacturer }}</dd>
+                <dt>Port Name</dt>
+                <dd>{{ input.name }}</dd>
+                <dt>Version</dt>
+                <dd>{{ input.version }}</dd>
+            </dl>
+
+        </li>
+    }
+</ul>
+
+<h2>Outputs</h2>
+
+<ul>
+    @for (output of outputs; track output.id) {
+        <li>
+            <dl>
+                <dt>ID</dt>
+                <dd>{{ output.id }}</dd>
+                <dt>Type</dt>
+                <dd>{{ output.type }}</dd>
+                <dt>Manufacturer</dt>
+                <dd>{{ output.manufacturer }}</dd>
+                <dt>Port Name</dt>
+                <dd>{{ output.name }}</dd>
+                <dt>Version</dt>
+                <dd>{{ output.version }}</dd>
+            </dl>
+        </li>
+    }
+</ul>
+
+<h2>Messages</h2>
+
+<ul>
+    @for (message of $messages(); track message.timestamp) {
+        <li>
+            <dl>
+                <dt>Timestamp</dt>
+                <dd>{{ message.timestamp }}</dd>
+                <dt>Data</dt>
+                <dd>{{ message.data }}</dd>
+            </dl>
+        </li>
+    }
+</ul>

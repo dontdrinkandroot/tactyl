@@ -23,23 +23,11 @@ export class MidiService {
         throw new Error("MIDI not initialized");
     }
 
-    public listInputsAndOutputs() {
-        for (const entry of this.getMidiAccess().inputs) {
-            const input = entry[1];
-            console.log(
-                `Input port [type:'${input.type}']` +
-                ` id:'${input.id}'` +
-                ` manufacturer:'${input.manufacturer}'` +
-                ` name:'${input.name}'` +
-                ` version:'${input.version}'`,
-            );
-        }
+    public getInputs(): MIDIInput[] {
+        return Array.from(this.getMidiAccess().inputs.values());
+    }
 
-        for (const entry of this.getMidiAccess().outputs) {
-            const output = entry[1];
-            console.log(
-                `Output port [type:'${output.type}'] id:'${output.id}' manufacturer:'${output.manufacturer}' name:'${output.name}' version:'${output.version}'`,
-            );
-        }
+    public getOutputs(): MIDIOutput[] {
+        return Array.from(this.getMidiAccess().outputs.values());
     }
 }
