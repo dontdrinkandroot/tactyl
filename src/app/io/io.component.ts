@@ -1,14 +1,21 @@
 import {ChangeDetectionStrategy, Component, signal, WritableSignal} from '@angular/core';
 import {MidiService} from "../midi.service";
+import {NumberToHexStringPipe} from "../util/number-to-hex-string.pipe";
+import {DatePipe} from "@angular/common";
+import {HighResTimestampToTimestampPipe} from "../util/highres-timestamp-to-timestamp.pipe";
 
 export type MidiMessage = {
     timestamp: number,
-    data: string
+    data: Uint8Array | null
 }
 
 @Component({
     selector: 'app-io',
-    imports: [],
+    imports: [
+        NumberToHexStringPipe,
+        DatePipe,
+        HighResTimestampToTimestampPipe
+    ],
     templateUrl: './io.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -25,19 +32,20 @@ export class IoComponent {
 
         /* Add all input messages to messages, newest first */
         this.inputs.forEach(input => {
-            input.onmidimessage = (event) => {
-                const hexData = event.data ? Array.from(event.data)
-                    .map(byte => `0x${byte.toString(16)}`)
-                    .join(' ') : 'No data';
+            input.onmidimessage = (event: MIDIMessageEvent) => {
                 this.$messages.update(messages => [
                     {
                         timestamp: event.timeStamp,
-                        data: hexData
+                        data: event.data
                     }, ...messages
                 ]);
 
             }
         });
 
+    }
+
+    protected clear() {
+        this.$messages.set([]);
     }
 }

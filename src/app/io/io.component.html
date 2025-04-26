@@ -45,14 +45,22 @@
 
 <h2>Messages</h2>
 
+<button type="button" (click)="clear()">Clear</button>
+
 <ul>
     @for (message of $messages(); track message.timestamp) {
         <li>
             <dl>
                 <dt>Timestamp</dt>
-                <dd>{{ message.timestamp }}</dd>
+                <dd>{{ message.timestamp|highResTimestampToTimestamp|date:'medium' }}</dd>
                 <dt>Data</dt>
-                <dd>{{ message.data }}</dd>
+                <dd>
+                    <ul>
+                        @for (datum of message.data; track datum) {
+                            <li>{{ datum|numberToHexString }}</li>
+                        }
+                    </ul>
+                </dd>
             </dl>
         </li>
     }

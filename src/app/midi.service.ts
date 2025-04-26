@@ -5,7 +5,10 @@ export class MidiService {
     private midiAccess: MIDIAccess | null = null
 
     public async init() {
-        return navigator.requestMIDIAccess().then(
+        return navigator.requestMIDIAccess({
+            sysex: true,
+            software: true
+        }).then(
             (midiAccess) => {
                 console.log("MIDI ready!");
                 this.midiAccess = midiAccess;
