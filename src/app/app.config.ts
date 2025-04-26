@@ -3,6 +3,7 @@ import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
 import {MidiService} from "./midi.service";
+import {MAT_ICON_DEFAULT_OPTIONS} from "@angular/material/icon";
 
 export const appConfig: ApplicationConfig = {
     providers: [
@@ -11,6 +12,10 @@ export const appConfig: ApplicationConfig = {
         provideAppInitializer(() => {
             const midiService = inject(MidiService);
             return midiService.init();
-        })
+        }),
+        {
+            provide: MAT_ICON_DEFAULT_OPTIONS,
+            useValue: { fontSet: 'material-symbols-rounded' }
+        }
     ]
 };
