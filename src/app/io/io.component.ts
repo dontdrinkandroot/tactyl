@@ -1,22 +1,19 @@
 import {ChangeDetectionStrategy, Component, signal, WritableSignal} from '@angular/core';
-import {MidiService} from "../midi.service";
-import {NumberToHexStringPipe} from "../util/number-to-hex-string.pipe";
-import {DatePipe} from "@angular/common";
+import {MidiService} from "../midi/midi.service";
+import {DatePipe, JsonPipe} from "@angular/common";
 import {HighResTimestampToTimestampPipe} from "../util/highres-timestamp-to-timestamp.pipe";
 import {MatToolbarModule} from "@angular/material/toolbar";
-
-export type MidiMessage = {
-    timestamp: number,
-    data: Uint8Array | null
-}
+import {MatRadioModule} from "@angular/material/radio";
+import {MessageType, MidiMessage, parseMidiEvent} from "../midi/midi-message";
 
 @Component({
     selector: 'app-io',
     imports: [
-        NumberToHexStringPipe,
         DatePipe,
         HighResTimestampToTimestampPipe,
-        MatToolbarModule
+        MatToolbarModule,
+        MatRadioModule,
+        JsonPipe
     ],
     templateUrl: './io.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
@@ -26,28 +23,31 @@ export class IoComponent {
     protected inputs: MIDIInput[];
     protected outputs: MIDIOutput[];
 
-    protected $messages: WritableSignal<MidiMessage[]> = signal<MidiMessage[]>([]);
+    protected $timestampedMessages: WritableSignal<{ timestamp: DOMHighResTimeStamp, message: MidiMessage }[]> = signal<{
+        timestamp: DOMHighResTimeStamp,
+        message: MidiMessage
+    }[]>([]);
 
     constructor(private readonly midiService: MidiService) {
         this.inputs = this.midiService.getInputs();
         this.outputs = this.midiService.getOutputs();
 
-        /* Add all input messages to messages, newest first */
         this.inputs.forEach(input => {
             input.onmidimessage = (event: MIDIMessageEvent) => {
-                this.$messages.update(messages => [
-                    {
-                        timestamp: event.timeStamp,
-                        data: event.data
-                    }, ...messages
-                ]);
+                let timestampedMessage = {
+                    timestamp: event.timeStamp,
+                    message: parseMidiEvent(event)
+                };
+                console.log(timestampedMessage);
+                this.$timestampedMessages.update(timestampedMessages => [timestampedMessage, ...timestampedMessages]);
 
             }
         });
-
     }
 
     protected clear() {
-        this.$messages.set([]);
+        this.$timestampedMessages.set([]);
     }
+
+    protected readonly MessageType = MessageType;
 }

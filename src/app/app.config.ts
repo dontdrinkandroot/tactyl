@@ -2,7 +2,7 @@ import {ApplicationConfig, inject, provideAppInitializer, provideZoneChangeDetec
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
-import {MidiService} from "./midi.service";
+import {MidiService} from "./midi/midi.service";
 import {MAT_ICON_DEFAULT_OPTIONS} from "@angular/material/icon";
 
 export const appConfig: ApplicationConfig = {

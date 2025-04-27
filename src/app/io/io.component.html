@@ -2,65 +2,32 @@
 
 <h2>Inputs</h2>
 
-<ul>
+<mat-radio-group aria-label="Select an input" style="display: flex; flex-direction: column;">
     @for (input of inputs; track input.id) {
-        <li>
-            <dl>
-                <dt>ID</dt>
-                <dd>{{ input.id }}</dd>
-                <dt>Type</dt>
-                <dd>{{ input.type }}</dd>
-                <dt>Manufacturer</dt>
-                <dd>{{ input.manufacturer }}</dd>
-                <dt>Port Name</dt>
-                <dd>{{ input.name }}</dd>
-                <dt>Version</dt>
-                <dd>{{ input.version }}</dd>
-            </dl>
-
-        </li>
+        <mat-radio-button value="{{ input }}">{{ input.name }}</mat-radio-button>
     }
-</ul>
+</mat-radio-group>
 
 <h2>Outputs</h2>
 
-<ul>
+<mat-radio-group aria-label="Select an output" style="display: flex; flex-direction: column;">
     @for (output of outputs; track output.id) {
-        <li>
-            <dl>
-                <dt>ID</dt>
-                <dd>{{ output.id }}</dd>
-                <dt>Type</dt>
-                <dd>{{ output.type }}</dd>
-                <dt>Manufacturer</dt>
-                <dd>{{ output.manufacturer }}</dd>
-                <dt>Port Name</dt>
-                <dd>{{ output.name }}</dd>
-                <dt>Version</dt>
-                <dd>{{ output.version }}</dd>
-            </dl>
-        </li>
+        <mat-radio-button value="{{ output }}">{{ output.name }}</mat-radio-button>
     }
-</ul>
+</mat-radio-group>
 
 <h2>Messages</h2>
 
 <button type="button" (click)="clear()">Clear</button>
 
 <ul>
-    @for (message of $messages(); track message.timestamp) {
+    @for (timestampedMessage of $timestampedMessages(); track timestampedMessage) {
         <li>
             <dl>
                 <dt>Timestamp</dt>
-                <dd>{{ message.timestamp|highResTimestampToTimestamp|date:'medium' }}</dd>
-                <dt>Data</dt>
-                <dd>
-                    <ul>
-                        @for (datum of message.data; track datum) {
-                            <li>{{ datum|numberToHexString }}</li>
-                        }
-                    </ul>
-                </dd>
+                <dd>{{ timestampedMessage.timestamp|highResTimestampToTimestamp|date:'medium' }}</dd>
+                <dt>Message</dt>
+                <dd>{{ timestampedMessage.message|json }}</dd>
             </dl>
         </li>
     }

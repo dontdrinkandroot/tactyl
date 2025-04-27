@@ -2,7 +2,12 @@ import {Injectable} from "@angular/core";
 
 @Injectable({providedIn: 'root'})
 export class MidiService {
-    private midiAccess: MIDIAccess | null = null
+
+    private midiAccess: MIDIAccess | null = null;
+
+    private input: MIDIInput | null = null;
+
+    private output: MIDIOutput | null = null;
 
     public async init() {
         return navigator.requestMIDIAccess({
@@ -32,5 +37,9 @@ export class MidiService {
 
     public getOutputs(): MIDIOutput[] {
         return Array.from(this.getMidiAccess().outputs.values());
+    }
+
+    public parseMidiMessage(event: MIDIMessageEvent) {
+
     }
 }
