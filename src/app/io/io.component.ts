@@ -3,6 +3,7 @@ import {MidiService} from "../midi.service";
 import {NumberToHexStringPipe} from "../util/number-to-hex-string.pipe";
 import {DatePipe} from "@angular/common";
 import {HighResTimestampToTimestampPipe} from "../util/highres-timestamp-to-timestamp.pipe";
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 export type MidiMessage = {
     timestamp: number,
@@ -14,7 +15,8 @@ export type MidiMessage = {
     imports: [
         NumberToHexStringPipe,
         DatePipe,
-        HighResTimestampToTimestampPipe
+        HighResTimestampToTimestampPipe,
+        MatToolbarModule
     ],
     templateUrl: './io.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
