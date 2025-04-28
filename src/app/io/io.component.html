@@ -15,20 +15,3 @@
         <mat-radio-button [value]="output">{{ output.name }}</mat-radio-button>
     }
 </mat-radio-group>
-
-<h2>Messages</h2>
-
-<button type="button" (click)="clear()">Clear</button>
-
-<ul>
-    @for (timestampedMessage of $timestampedMessages(); track timestampedMessage) {
-        <li>
-            <dl>
-                <dt>Timestamp</dt>
-                <dd>{{ timestampedMessage.timestamp|highResTimestampToTimestamp|date:'medium' }}</dd>
-                <dt>Message</dt>
-                <dd>{{ timestampedMessage.message|json }}</dd>
-            </dl>
-        </li>
-    }
-</ul>
