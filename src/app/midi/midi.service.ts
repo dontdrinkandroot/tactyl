@@ -104,6 +104,6 @@ export class MidiService {
             timestamp: event.timeStamp,
             message: parseMidiEvent(event)
         };
-        //console.log('MIDI IN', timestampedMessage);
+        console.log('MIDI IN', timestampedMessage);
     }
 }
