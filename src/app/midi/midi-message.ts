@@ -32,7 +32,7 @@ export interface ChannelMessage extends MidiMessage {
     readonly channel: number;
 }
 
-export interface NoteMessage {
+export interface NoteMessage extends ChannelMessage {
     readonly note: number;
     readonly velocity: number;
 }

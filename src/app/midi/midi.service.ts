@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {MidiMessage, parseMidiEvent} from "./midi-message";
+import {Subject} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class MidiService {
@@ -9,6 +10,8 @@ export class MidiService {
     private input: MIDIInput | null = null;
 
     private output: MIDIOutput | null = null;
+
+    private message$: Subject<MidiMessage> = new Subject<MidiMessage>();
 
     public async init() {
         console.log('Initializing MIDI Service');
@@ -100,10 +103,12 @@ export class MidiService {
             return
         }
 
-        const timestampedMessage = {
-            timestamp: event.timeStamp,
-            message: parseMidiEvent(event)
-        };
-        console.log('MIDI IN', timestampedMessage);
+        const midiMessage = parseMidiEvent(event);
+        this.message$.next(midiMessage);
+        console.log('MIDI IN', midiMessage);
+    }
+
+    public getMessageObservable() {
+        return this.message$.asObservable();
     }
 }

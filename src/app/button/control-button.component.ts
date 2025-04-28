@@ -12,11 +12,12 @@ import {ControlChangeMessage} from "../midi/midi-message";
     }
 })
 export class ControlButtonComponent {
+
     public $channel = input.required<number>({alias: 'channel'});
+
     public $control = input.required<number>({alias: 'control'});
 
     constructor(private readonly midiService: MidiService) {
-
     }
 
     protected trigger() {

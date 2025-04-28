@@ -39,6 +39,16 @@ main {
     @extend .px-full;
 }
 
+button {
+    &.triggering {
+        border-color: orange;
+    }
+
+    &.running {
+        border-color: green;
+    }
+}
+
 // Utilities
 
 .mdc-icon-button {
