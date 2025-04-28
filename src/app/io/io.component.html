@@ -2,17 +2,17 @@
 
 <h2>Inputs</h2>
 
-<mat-radio-group aria-label="Select an input" style="display: flex; flex-direction: column;">
+<mat-radio-group aria-label="Select an input" style="display: flex; flex-direction: column;" [(ngModel)]="$input" name="input">
     @for (input of inputs; track input.id) {
-        <mat-radio-button value="{{ input }}">{{ input.name }}</mat-radio-button>
+        <mat-radio-button [value]="input">{{ input.name }}</mat-radio-button>
     }
 </mat-radio-group>
 
 <h2>Outputs</h2>
 
-<mat-radio-group aria-label="Select an output" style="display: flex; flex-direction: column;">
+<mat-radio-group aria-label="Select an output" style="display: flex; flex-direction: column;" [(ngModel)]="$output" name="output">
     @for (output of outputs; track output.id) {
-        <mat-radio-button value="{{ output }}">{{ output.name }}</mat-radio-button>
+        <mat-radio-button [value]="output">{{ output.name }}</mat-radio-button>
     }
 </mat-radio-group>
 

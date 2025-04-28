@@ -1,0 +1,61 @@
+<h1>Debug</h1>
+
+<h2>Note On</h2>
+<form [formGroup]="noteOnFormGroup" (ngSubmit)="sendNoteOn()">
+    <mat-form-field class="me-full">
+        <mat-label>Channel</mat-label>
+        <input type="number" matInput formControlName="channel">
+    </mat-form-field>
+
+    <mat-form-field class="me-full">
+        <mat-label>Note</mat-label>
+        <input type="number" matInput formControlName="note">
+    </mat-form-field>
+
+    <mat-form-field class="me-full">
+        <mat-label>Velocity</mat-label>
+        <input type="number" matInput formControlName="velocity">
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button>Send</button>
+</form>
+
+<h2>Note Off</h2>
+<form [formGroup]="noteOffFormGroup" (ngSubmit)="sendNoteOff()">
+    <mat-form-field class="me-full">
+        <mat-label>Channel</mat-label>
+        <input type="number" matInput formControlName="channel">
+    </mat-form-field>
+
+    <mat-form-field class="me-full">
+        <mat-label>Note</mat-label>
+        <input type="number" matInput formControlName="note">
+    </mat-form-field>
+
+    <mat-form-field class="me-full">
+        <mat-label>Velocity</mat-label>
+        <input type="number" matInput formControlName="velocity">
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button>Send</button>
+</form>
+
+<h2>Control Change</h2>
+<form [formGroup]="controlChangeFormGroup" (ngSubmit)="sendControlChange()">
+    <mat-form-field class="me-full">
+        <mat-label>Channel</mat-label>
+        <input type="number" matInput formControlName="channel">
+    </mat-form-field>
+
+    <mat-form-field class="me-full">
+        <mat-label>Control</mat-label>
+        <input type="number" matInput formControlName="control">
+    </mat-form-field>
+
+    <mat-form-field class="me-full">
+        <mat-label>Value</mat-label>
+        <input type="number" matInput formControlName="value">
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button>Send</button>
+</form>

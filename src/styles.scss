@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use "sass:map";
 
 html {
     color-scheme: dark;
@@ -35,10 +36,63 @@ aside {
 
 main {
     flex: 1;
+    @extend .px-full;
 }
+
+// Utilities
 
 .mdc-icon-button {
     &.active {
         color: #2196F3;
+    }
+}
+
+$spacings: (
+        'quarter': 0.25rem,
+        'half': 0.5rem,
+        'full': 1rem,
+        'double': 2rem
+);
+
+$spacing-properties: (
+        'p': 'padding',
+        'm': 'margin'
+);
+
+$directions: (
+        't': 'top',
+        'b': 'bottom',
+        's': 'left',
+        'e': 'right',
+        'x': 'x',
+        'y': 'y'
+);
+
+@mixin generate-spacing($property, $direction, $size) {
+    $value: map.get($spacings, $size);
+    @if not $value {
+        @error "Invalid spacing size: #{$size}";
+    }
+
+    @if $direction == 'x' {
+        #{$property}: 0 $value;
+    } @else if $direction == 'y' {
+        #{$property}: $value 0;
+    } @else {
+        #{$property}-#{$direction}: $value;
+    }
+}
+
+@each $size in map.keys($spacings) {
+    @each $prop-key, $prop-value in $spacing-properties {
+        .#{$prop-key}-#{$size} {
+            #{$prop-value}: map.get($spacings, $size);
+        }
+
+        @each $dir-key, $dir-value in $directions {
+            .#{$prop-key}#{$dir-key}-#{$size} {
+                @include generate-spacing($prop-value, $dir-value, $size);
+            }
+        }
     }
 }

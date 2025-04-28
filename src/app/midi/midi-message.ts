@@ -25,7 +25,7 @@ const MIDI_STATUS = {
 export interface MidiMessage {
     readonly type: MessageType;
 
-    toString(): string;
+    toData(): number[];
 }
 
 export interface ChannelMessage extends MidiMessage {

@@ -1,4 +1,5 @@
 import {Injectable} from "@angular/core";
+import {MidiMessage} from "./midi-message";
 
 @Injectable({providedIn: 'root'})
 export class MidiService {
@@ -39,7 +40,27 @@ export class MidiService {
         return Array.from(this.getMidiAccess().outputs.values());
     }
 
-    public parseMidiMessage(event: MIDIMessageEvent) {
+    public send(message: MidiMessage): void {
+        const output = this.output;
+        if (null === output) {
+            throw new Error("MIDI output not initialized");
+        }
+        output.send(message.toData());
+    }
 
+    public getInput(): MIDIInput | null {
+        return this.input;
+    }
+
+    public setInput(input: MIDIInput | null) {
+        this.input = input;
+    }
+
+    public getOutput(): MIDIOutput | null {
+        return this.output;
+    }
+
+    public setOutput(output: MIDIOutput | null) {
+        this.output = output;
     }
 }
