@@ -1,0 +1,13 @@
+:host {
+    display: grid;
+    //grid-template-columns: repeat(17, 1fr);
+    //grid-template-rows: repeat(16, 1fr);
+    height: 100%;
+    width: 100%;
+
+    .grid-item {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+}
